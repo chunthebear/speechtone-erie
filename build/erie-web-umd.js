@@ -4043,11 +4043,11 @@
   }
   return new Promise((resolve, reject) => {
     if (!ErieGlobalSynth) ErieGlobalSynth = window.speechSynthesis;
-    if (sound.__datum[sound.others.SpeechToneTxt]){
-      var utterance = new SpeechSynthesisUtterance(sound.__datum[sound.others.SpeechToneTxt].toString());
+    if (sound.__datum[sound.others.SpeechToneText]){
+      var utterance = new SpeechSynthesisUtterance(sound.__datum[sound.others.SpeechToneText].toString());
     }
     else {
-      var utterance = new SpeechSynthesisUtterance(sound.others.SpeechToneTxt);
+      var utterance = new SpeechSynthesisUtterance(sound.others.SpeechToneText);
     }
     
     if (sound?.others?.SpeechToneVoice !== undefined){
@@ -4062,7 +4062,7 @@
     if (sound?.others?.SpeechToneLoudness !== undefined) utterance.volume = sound?.others?.SpeechToneLoudness;
     emitNotePlayEvent('speech', sound);
     ErieGlobalSynth.speak(utterance);
-    window.console.log(sound.__datum[sound.others.SpeechToneTxt]);
+    window.console.log(sound.__datum[sound.others.SpeechToneText]);
     ErieGlobalControl = { type: Speech, player: ErieGlobalSynth };
     utterance.onend = () => {
       window.removeEventListener('keypress', stop);
@@ -5512,7 +5512,7 @@
       this.queue.setWaves(this.waves);
 
       if (!this.config.skipStartSpeech) {
-        this.queue.add(TextType, { speech: `Extened erie version `, speechRate: this.config?.speechRate }, this.config);
+        this.queue.add(TextType, { speech: `Speech-extended Erie.`, speechRate: this.config?.speechRate }, this.config);
       }
 
       // 1. main title && description

@@ -582,11 +582,11 @@ if (!config.subpart) {
 }
 return new Promise((resolve, reject) => {
   if (!ErieGlobalSynth) ErieGlobalSynth = window.speechSynthesis;
-  if (sound.__datum[sound.others.SpeechToneTxt]){
-    var utterance = new SpeechSynthesisUtterance(sound.__datum[sound.others.SpeechToneTxt].toString());
+  if (sound.__datum[sound.others.SpeechToneText]){
+    var utterance = new SpeechSynthesisUtterance(sound.__datum[sound.others.SpeechToneText].toString());
   }
   else{
-    var utterance = new SpeechSynthesisUtterance(sound.others.SpeechToneTxt);
+    var utterance = new SpeechSynthesisUtterance(sound.others.SpeechToneText);
   }
   
   if (sound?.others?.SpeechToneVoice !== undefined){
@@ -596,12 +596,12 @@ return new Promise((resolve, reject) => {
     window.console.log(voices);
   }
   if (sound?.others?.SpeechToneSpeed !== undefined) utterance.rate = sound.others.SpeechToneSpeed;
-  window.console.log(utterance.rate);
+  // window.console.log(utterance.rate);
   if (sound?.others?.SpeechTonePitch !== undefined) utterance.pitch = sound?.others?.SpeechTonePitch;
   if (sound?.others?.SpeechToneLoudness !== undefined) utterance.volume = sound?.others?.SpeechToneLoudness;
   emitNotePlayEvent('speech', sound);
   ErieGlobalSynth.speak(utterance);
-  window.console.log(sound.__datum[sound.others.SpeechToneTxt]);
+  window.console.log(sound.__datum[sound.others.SpeechToneText]);
   ErieGlobalControl = { type: Speech, player: ErieGlobalSynth };
   utterance.onend = () => {
     window.removeEventListener('keypress', stop);
