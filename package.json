@@ -1,0 +1,43 @@
+{
+  "name": "erie-web",
+  "version": "0.2.4",
+  "description": "A declarative grammar for data sonification for web",
+  "main": "index.js",
+  "module": "main.js",
+  "unpkg": "build/erie-web.min.js",
+  "jsdelivr": "build/erie-web.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup main.js --file build/erie-web.js --format iife && rollup main.js --file build/erie-web.min.js --format iife --compact && rollup main.js --file build/erie-web-node.js --format cjs && rollup main.js --file build/erie-web-node.min.js --format cjs --compact && rollup main.js --file build/erie-web-umd.js --format umd --name \"Erie\" && rollup main.js --file build/erie-web-umd.min.js --format umd --name \"Erie\" --compact"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/see-mike-out/erie-web.git"
+  },
+  "keywords": [
+    "data",
+    "sonification"
+  ],
+  "author": "Hyeok Kim",
+  "bugs": {
+    "url": "https://github.com/see-mike-out/erie-web/issues"
+  },
+  "homepage": "https://see-mike-out.github.io/erie-documentation",
+  "license": "MIT",
+  "devDependencies": {
+    "esm": "^3.2.25",
+    "esm-wallaby": "^3.2.29"
+  },
+  "dependencies": {
+    "arquero": "^5.2.0",
+    "d3": "^7.8.4",
+    "moment": "^2.29.4",
+    "rollup": "^4.18.0",
+    "speak-tts": "^2.0.8",
+    "vega": "^5.27.0"
+  },
+  "esm": {
+    "cjs": true,
+    "await": true
+  }
+}
