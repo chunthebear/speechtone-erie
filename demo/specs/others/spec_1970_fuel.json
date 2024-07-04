@@ -1,0 +1,47 @@
+{
+    "description": "Number of .",
+    "data": {
+    "url": "/data/cars.json"
+    },
+    "transform" : [
+        {
+            "filter": "datum.Year < 1971",
+        }
+    ],
+    "tone": {
+        "continued": false,
+        "type": "speechtone"
+    },
+    "encoding": {
+        "time": {
+            "field": "Year",
+            "type": "nominal",
+        },
+        "SpeechToneText":{
+            "value": "Name"
+        },
+        "SpeechToneSpeed":{
+            "field": "Miles_per_Gallon",
+            "type": "quantitative",
+            "scale": {
+                "range":[0, 5]
+            }
+        }
+        //,
+        // "SpeechTonePitch":{
+        //     "field": "y_o_count",
+        //     "type": "quantitative",
+        //     "bin": true,
+        //     "scale": {
+        //         "range":[0, 10]
+        //     }
+        // }
+    },
+    "config": {
+        "speechRate": 1.5,
+        "skipScaleSpeech":true,
+        "skipDescription":true,
+        "skipTitle":true,
+        "skipSequenceDescription":true
+    }
+}

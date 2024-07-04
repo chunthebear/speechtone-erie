@@ -1,0 +1,45 @@
+{
+    "description": "Number of car models produced in each year, mapped to speech pitch.",
+    "data": {
+    "url": "/data/cars.json"
+    },
+    "transform" : [
+        {
+            "filter": "datum.Year > 1970 && datum.Year <= 1975"
+        }
+    ],
+    "tone": {
+        "continued": false,
+        "type": "speechtone"
+    },
+    "encoding": {
+        "time": {
+            "field": "Year",
+            "type": "quantitative"
+        },
+        "SpeechToneText":{
+            "value": "Year"
+        },
+        "SpeechTonePitch":{
+            "aggregate": "count",
+            "type": "quantitative",
+            "scale": {
+                "range":[0.75, 2]
+            }
+        },
+        "SpeechToneSpeed":{
+            "aggregate": "Year",
+            "type": "nominal",
+            "scale": {
+                "range":[2, 2]
+            }
+        }
+    },
+    "config": {
+        "speechRate": 1.5,
+        "skipScaleSpeech":true,
+        "skipDescription":true,
+        "skipTitle":true,
+        "skipSequenceDescription":true
+    }
+}

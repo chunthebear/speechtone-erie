@@ -1,0 +1,54 @@
+{
+    "description": "A histogram of Miles_per_Gallonn varile.",
+    "data": {
+    "url": "/data/cars.json"
+    },
+    "transform" : [
+        {
+            
+            "aggregate": [
+                { "op": "count", "as": "y_o_count" }
+                ],
+            "groupby": [
+                "Year", "Origin"
+                ]
+        }
+    ],
+    "tone": {
+        "continued": false,
+        "type": "speechtone"
+    },
+    "encoding": {
+        "time": {
+            "field": "Year",
+            "type": "nominal"
+        },
+    
+        "SpeechToneText":{
+            "value": "Origin"
+        },
+        "SpeechToneSpeed":{
+            "field": "y_o_count",
+            "type": "quantitative",
+            "bin": true,
+            "scale": {
+                "range":[0, 5]
+            }
+        }//,
+        // "SpeechTonePitch":{
+        //     "field": "y_o_count",
+        //     "type": "quantitative",
+        //     "bin": true,
+        //     "scale": {
+        //         "range":[0, 10]
+        //     }
+        // }
+    },
+    "config": {
+        "speechRate": 1,
+        "skipScaleSpeech":true,
+        "skipDescription":true,
+        "skipTitle":true,
+        "skipSequenceDescription":true
+    }
+}

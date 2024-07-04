@@ -1,0 +1,45 @@
+{
+    "description": "Top performing cars in year 1982. Fuel consumption is mapped to time.",
+    "data": {
+    "url": "/data/cars.json"
+    },
+    "transform" : [
+        {
+            "filter": "datum.Year == 1982 && datum.Miles_per_Gallon > 37"
+        }
+    ],
+    "tone": {
+        "continued": false,
+        "type": "speechtone"
+    },
+    "encoding": {
+        "time": {
+            "field": "Miles_per_Gallon",
+            "type": "nominal"
+        },
+        "SpeechToneText":{
+            "value": "Name"
+        },
+        "SpeechToneVoice":{
+            "field": "Origin",
+            "type": "nominal",
+            "scale": {
+                "range":[65, 34, 0]
+            }
+        },
+        "SpeechToneSpeed":{
+            "field": "Origin",
+            "type": "nominal",
+            "scale": {
+                "range":[1.2, 1.2]
+            }
+        }
+    },
+    "config": {
+        "speechRate": 1.5,
+        "skipScaleSpeech":true,
+        "skipDescription":true,
+        "skipTitle":true,
+        "skipSequenceDescription":true
+    }
+}

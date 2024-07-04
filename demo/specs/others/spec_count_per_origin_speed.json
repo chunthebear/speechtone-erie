@@ -1,0 +1,33 @@
+{
+    "description": "Number of car models produced in each origin, mapped to speech pitch or speed.",
+    "data": {
+    "url": "/data/cars.json"
+    },
+    "tone": {
+        "continued": false,
+        "type": "speechtone"
+    },
+    "encoding": {
+        "time": {
+            "field": "Origin",
+            "type": "nominal"
+        },
+        "SpeechToneText":{
+            "value": "Origin"
+        },
+        "SpeechToneSpeed":{
+            "aggregate": "count",
+            "type": "quantitative",
+            "scale": {
+                "range":[1, 3.0]
+            }
+        }
+    },
+    "config": {
+        "speechRate": 1.5,
+        "skipScaleSpeech":true,
+        "skipDescription":true,
+        "skipTitle":true,
+        "skipSequenceDescription":true
+    }
+}

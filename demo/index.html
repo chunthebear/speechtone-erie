@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<script src="https://cdn.jsdelivr.net/npm/arquero@latest"></script>
+        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega@5/build-es5/vega.min.js"></script>
+        <script src="./erie-web.js"></script>
+
+        
+
+	</head>
+	<body>
+		<title>SpeechTone Demonstration</title>
+
+        <button id="demo1">Demo 1</button>
+        <button id="demo2">Demo 2</button>
+        <button id="demo3">Demo 3</button>
+        <button id="stop">Stop</button>
+
+        <script> 
+            let audio;
+            let status = false;
+            let spec;
+            let demoNum = 0;
+        
+            window.onload = () => {
+                function stopEvent(event) {
+                        if (event.key == 'x') {
+                            stop();
+                        }
+                    }
+                window.addEventListener('keypress', stopEvent);
+            };
+            
+            async function playSpec() {
+                let specName = "";
+                if (demoNum == 0) {
+                    return; 
+                } else if (demoNum == 1) {
+                    specName = "spec_count_per_origin_pitch"; 
+                } else if (demoNum == 2) {
+                    specName = "spec_1970-1975_count_speed"; 
+                } else if (demoNum == 3) {
+                    specName = "spec_1982_top"; 
+                }
+
+                await fetch("/specs/"+specName+".json")
+                    .then(res => res.json())
+                    .then(data => spec = data);
+                console.log(spec);
+
+                Erie.compileAuidoGraph(spec)
+                    .then((audio_graph) => {
+                        audio = audio_graph;
+                        console.log(audio);
+                        audio.prerender();
+                        window.audioPlayer = audio;
+                    }).then(() => {
+                        play();
+                    })
+                    .catch((e) => {
+                        specError = true;
+                        console.warn(e);
+                    });
+            };
+        
+            function play() {
+                if (audio) {
+                    audio.playQueue();
+                    status = true;
+                } else {
+                    console.warn('Audio not ready');
+                }
+            }
+
+            function stop() {
+                audio?.stopQueue();
+                status = false;
+                resumeButtons();
+            }
+
+            document.getElementById("demo1").addEventListener("click", function() {
+                disableButtons();
+                demoNum = 1;
+                playSpec();
+            });
+            document.getElementById("demo2").addEventListener("click", function() {
+                disableButtons();
+                demoNum = 2;
+                playSpec();
+            });
+            document.getElementById("demo3").addEventListener("click", function() {
+                disableButtons();
+                demoNum = 3;
+                playSpec();
+            });
+
+            document.getElementById("stop").addEventListener("click", function() {
+                stop();
+            });
+
+            document.body.addEventListener('erieOnFinishQueue', function(event) {
+                if (event.type == "erieOnFinishQueue")
+                    resumeButtons();
+            })
+
+            function resumeButtons(){
+                document.getElementById("demo1").disabled = false;
+                document.getElementById("demo2").disabled = false;
+                document.getElementById("demo3").disabled = false;
+            }
+            function disableButtons(){
+                document.getElementById("demo1").disabled = true;
+                document.getElementById("demo2").disabled = true;
+                document.getElementById("demo3").disabled = true;
+            }
+
+        </script>
+	</body>
+</html>
+
+
+
+
+
