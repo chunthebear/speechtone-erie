@@ -9,4 +9,4 @@ npm i
 npm run build
 ```
 
-Please see the demo project for a detailed README for how to utilize SpeechTone. 
+Please see the demo project for a detailed README for how to utilize the SpeechTone-Erie library. 
